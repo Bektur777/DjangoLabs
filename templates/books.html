@@ -14,6 +14,7 @@
                     <p><em>{{ i.cost }}</em></p>
                     <img src="{{ i.image }}" alt="{{ i.title }}">
                     <p><strong>{{ i.created_at }}</strong></p>
+                    <a href="{{ i.get_absolute_url }}">View Book</a>
                 </li>
             {% endfor %}
     </center>
