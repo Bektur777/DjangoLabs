@@ -9,5 +9,4 @@ class ReviewBookForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'text_review': forms.TextInput(attrs={'placeholder': 'Введите комментарий'}),
-            'rate_stars': forms.TextInput(attrs={'placeholder': 'Введите рейтинг'})
         }
