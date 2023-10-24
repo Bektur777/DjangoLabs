@@ -12,6 +12,14 @@
             <p><em>{{ book.cost }}</em></p>
             <img src="{{ book.image.url }}" alt="{{ book.title }}">
             <p><strong>{{ book.created_at }}</strong></p>
+
+        <h2>Add comment</h2>
+        <form action="/add-review" method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">Отправить</button>
+          <button type="reset">Отменить</button>
+        </form>
     </center>
 </body>
 </html>

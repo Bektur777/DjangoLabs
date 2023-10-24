@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reviews</title>
+</head>
+<body>
+    <center>
+        {% for review in reviews_book %}
+            <p>{{ review.title_book }}</p>
+            <p>{{ review.text_review }}</p>
+            <p>{{ review.rate_stars }}</p>
+        {% endfor %}
+    </center>
+</body>
+</html>

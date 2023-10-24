@@ -5,6 +5,12 @@ from book.models import *
 
 
 @admin.register(Book)
-class ModelNameAdmin(admin.ModelAdmin):
+class ModelBookAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'cost', )
     list_display_links = ('title', )
+
+
+@admin.register(ReviewBook)
+class ModelReviewBookAdmin(admin.ModelAdmin):
+    list_display = ('id', 'text_review', 'rate_stars', )
+    list_display_links = ('id', )
