@@ -7,6 +7,14 @@
 <body>
     <center>
         <h1>Books</h1>
+        <form action="{% url 'search' %}" class="search-form" method="get">
+            <input type="text" placeholder="Введите название..." class="input" name="search" required>
+            <button type="submit" class="btn" for="search">Поиск</button>
+        </form>
+        <br>
+        <hr>
+        <hr>
+        <br>
             {% for i in books %}
                 <li>
                     <h2>{{ i.title }}</h2>
@@ -16,7 +24,7 @@
                     <p><strong>{{ i.created_at }}</strong></p>
                     <a href="{{ i.get_absolute_url }}">View Book</a>
                     <a href="{{ i.get_absolute_url }}/delete-review">Delete</a>
-                    <a href="/reviews">Reviews</a>
+                    <a href="book/reviews">Reviews</a>
                 </li>
             {% endfor %}
     </center>
