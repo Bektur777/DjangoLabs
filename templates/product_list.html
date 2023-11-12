@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+    <center>
+        <h1>Products</h1>
+        <form action="{% url 'filter' %}" method="get">
+            {% for tag in view.get_tags %}
+                <div class="wrapper filter-wrapper">
+                    <label>
+                        <input type="checkbox" class="checkbox" name="tags" value="{{ tag.id }}">
+                    </label>
+                    <h3 class="checkbox-title">{{ tag.name }}</h3>
+                </div>
+            {% endfor %}
+            <button type="submit" for="checkbox">Filter</button>
+        </form>
+    </center>
+
+    <hr>
+    <hr>
+    <hr>
+
+    <center>
+        {% for product in productcl_list %}
+            <p>{{ product.name }}</p>
+            <p>{{ product.price }}</p>
+            <form action="{% url 'order' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="product" value="{{ product.id }}">
+                <input type="hidden" name="price" value="{{ product.price }}">
+                <input type="number" name="count">
+                <button type="submit">Order</button>
+            </form>
+        {% endfor %}
+    </center>
+</body>
+</html>
