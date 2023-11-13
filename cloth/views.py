@@ -1,7 +1,8 @@
 from django.db.models import Q
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views.decorators.http import require_POST
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView
 
 from cloth.forms import OrderForm
 from cloth.models import *
@@ -33,7 +34,7 @@ class FilterProductView(ProductFilter, ListView):
 
 class ProductView(ListView, ProductFilter):
     model = ProductCL
-    queryset = ProductCL.objects.filter().order_by('-id')
+    queryset = ProductCL.objects.filter()
     paginate_by = 3
     template_name = 'product_list.html'
 
@@ -41,8 +42,11 @@ class ProductView(ListView, ProductFilter):
 @require_POST
 def order(request):
     product = request.POST.get('product')
-    total_amount = request.POST.get('price') * request.POST.get('count')
+    total_amount = float(request.POST.get('price')) * int(request.POST.get('count'))
 
-    make_order = OrderCL.objects.create(user=request.user, products=product, total_amount=total_amount)
+    product = ProductCL.objects.get(pk=product)
 
-    return redirect('')
+    make_order = OrderCL.objects.create(user=request.user, total_amount=total_amount)
+    make_order.products.set([product])
+
+    return redirect('product_view')
